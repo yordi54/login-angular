@@ -1,0 +1,29 @@
+<div class="card-login">
+    <mat-card>
+        <mat-card-header class="header-card">
+            <h1>Login</h1>   
+        </mat-card-header>
+        <mat-card-content>
+            <form class="form" [formGroup]="myForm" (ngSubmit)="login()">
+                <mat-form-field appearance="fill">
+                    <mat-label>Correo</mat-label>
+                    <input matInput placeholder="Ingrese su correo" formControlName="email" required>
+                    <mat-error *ngIf="myForm.get('email')?.hasError('required')">El correo es requerido</mat-error>
+                  </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>Contraseña</mat-label>
+                    <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+                    <button mat-icon-button matSuffix type="button" (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                    <mat-error *ngIf="myForm.get('password')?.hasError('required')">La contraseña es requerido</mat-error>
+                    <mat-error *ngIf="myForm.get('password')?.hasError('pass')">Credenciales Incorrectas </mat-error>
+                </mat-form-field>
+                <button class="button-login" mat-raised-button color="primary" type="submit" [disabled]=" myForm.invalid" >Login</button>
+                <p class="register-text"> Don't have an account?&nbsp;<a routerLink="/auth/register" >Registrarse</a></p>
+                
+            </form>
+            
+        </mat-card-content>
+    </mat-card>
+</div>

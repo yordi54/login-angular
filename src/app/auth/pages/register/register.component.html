@@ -1,0 +1,39 @@
+<div class="card-login">
+    <mat-card>
+        <mat-card-header class="header-card">
+            <h1>Registrarse</h1>   
+        </mat-card-header>
+        <mat-card-content>
+            <form class="form" [formGroup]="myForm" autocomplete="off" (ngSubmit)="register()">
+                <mat-form-field appearance="fill">
+                    <mat-label>Nombre</mat-label>
+                    <input matInput placeholder="Ingrese su nombre" formControlName="name" required>
+                    <mat-error *ngIf="myForm.get('name')?.hasError('required')">El nombre es requerido</mat-error>
+                  </mat-form-field>
+                  <mat-form-field appearance="fill">
+                    <mat-label>Apellido</mat-label>
+                    <input matInput placeholder="Ingrese su apellido" formControlName="lastname" required>
+                    <mat-error *ngIf="myForm.get('lastname')?.hasError('required')">El apellido es requerido</mat-error>
+                  </mat-form-field>
+                  <mat-form-field appearance="fill">
+                    <mat-label>Correo</mat-label>
+                    <input matInput placeholder="Ingrese su correo" formControlName="email" required>
+                    <mat-error *ngIf="myForm.get('email')?.hasError('required')">El correo es requerido</mat-error>
+                    <mat-error *ngIf="myForm.get('email')?.hasError('email')">Ingrese un correo válido</mat-error>
+                    <mat-error *ngIf="myForm.get('email')?.hasError('email_unique')">El correo ya existe</mat-error>
+                  </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>Contraseña</mat-label>
+                    <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+                    <button mat-icon-button type="button" matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                    <mat-error *ngIf="myForm.get('password')?.hasError('required')">La contraseña es requerido</mat-error>
+                  </mat-form-field>
+                <button class="button-login" mat-raised-button color="primary" type="submit" [disabled]="invalid()">Registrar</button>
+                <p class="register-text"> Do you have an account?&nbsp;<a routerLink="/auth/login" >Login</a></p>
+            </form>
+            
+        </mat-card-content>
+    </mat-card>
+</div>
